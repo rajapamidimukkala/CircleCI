@@ -1,8 +1,20 @@
 version: 2
 jobs:
   build:
-    docker: # use the docker executor type; machine and macos executors are also supported
-      - image: circleci/ruby:2.4.1 # the primary container, where your job's commands are run
+    docker:
+      - image: circleci/ruby:2.4.1
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout
+      - run: echo "This is build workflow"
+  test:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "This is test workflow"
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
